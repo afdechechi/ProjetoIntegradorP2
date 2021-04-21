@@ -1,0 +1,25 @@
+#list-pedidos {
+    height: 310px;
+    overflow-y: scroll;
+}
+
+#list-produtos {
+    height: 255px;
+    overflow-y: scroll;
+}
+
+.icons-list-produto {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: red;
+}
+
+#spinner {
+    width: 90%;
+}
+
+.ui-spinner {
+    width: 100%;
+}
