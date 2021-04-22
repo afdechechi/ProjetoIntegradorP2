@@ -15,6 +15,10 @@
                         @endif
 
                         You are logged in!
+                        <p></p>
+                        <a href='pedido' class="btn btn-lg btn-primary">Fazer Pedido</a>
+                        <p></p>
+                        <a href='endereco' class="btn btn-lg btn-primary">Adicionar Endereço</a>
                     </div>
                 </div>
             </div>

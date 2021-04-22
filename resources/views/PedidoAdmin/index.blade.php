@@ -18,10 +18,6 @@
                     <div class="col-5">
                         <a href="home" class="btn btn-primary w-100">Voltar</a>
                     </div>
-                    <form id="id-form-novo-pedido" class="col-7" method="POST" action="/pedido/1">
-                        @csrf
-                        <input type="submit" class="btn btn-info w-100" value="Novo Pedido">
-                    </form>
                 </div>
                 <div id="list-pedidos" class="list-group my-3">
                     @foreach ($pedidos as $pedido)
@@ -34,6 +30,32 @@
                 </div>
             </div>
             {{-- Parte do meio --}}
+            <div class="col-lg-4">
+                <div class="form-group my-3">
+                    <a href="#" class="form-control text-center active"  value={{$pedido->id}}>Pedido {{$pedido->id}}</a>
+                    
+                </div>
+                <div id="list-produtos" class="list-group my-3">
+                    @foreach ($produtosPedido as $produtoPedido)
+                        <span href="#" class="list-group-item" value1={{$produtoPedido->Pedidos_id}} value2={{$produtoPedido->Produtos_id}}>
+                            {{$produtoPedido->descricao}} - {{$produtoPedido->nome}} - {{$produtoPedido->quantidade}}x
+                            <svg data-toggle="modal" data-target="#destroyModal" value="/pedidoproduto/{{$produtoPedido->Pedidos_id}}/{{$produtoPedido->Produtos_id}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash icons-list-produto destroyButton" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </span>
+                    @endforeach
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" value="Valor total">
+                    <div class="input-group-append">
+                        <span class="input-group-text">R$</span>
+                        <span id="id-spam-preco" class="input-group-text">{{$totalPedido}}</span>
+                    </div>
+                </div>
+
+            </div>
+            {{-- Parte da direita --}}
             <div class="col-lg-4">
                 <h2 class="text-center my-3">Adicione Produtos</h2>
                 {{-- Formulario de Tipo de Produto --}}
@@ -94,35 +116,26 @@
                         </select>
                     </div>
                 </form>
-                {{-- Botão enviar --}}
+                {{-- Botão confirmar --}}
                 <form id="id-form-enviar-pedido" method="POST" class="my-3" action="#">
                     @csrf
-                    <input type="submit" class="btn btn-info w-100" value="Enviar Pedido">
+                    <input type="submit" class="btn btn-warning w-100" value="Confirmar Pedido">
                 </form>
-            </div>
-            {{-- Parte da direita --}}
-            <div class="col-lg-4">
-                <div class="form-group my-3">
-                    <input id="id-text-status" type="text" class="form-control text-center" id="id-text-status" value="Estado: {{$estado}}" readonly>
-                </div>
-                <div id="list-produtos" class="list-group my-3">
-                    @foreach ($produtosPedido as $produtoPedido)
-                        <span href="#" class="list-group-item" value1={{$produtoPedido->Pedidos_id}} value2={{$produtoPedido->Produtos_id}}>
-                            {{$produtoPedido->descricao}} - {{$produtoPedido->nome}} - {{$produtoPedido->quantidade}}x
-                            <svg data-toggle="modal" data-target="#destroyModal" value="/pedidoproduto/{{$produtoPedido->Pedidos_id}}/{{$produtoPedido->Produtos_id}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash icons-list-produto destroyButton" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg>
-                        </span>
-                    @endforeach
-                </div>
-                <div class="input-group">
-                    <input type="text" class="form-control" value="Valor total">
-                    <div class="input-group-append">
-                        <span class="input-group-text">R$</span>
-                        <span id="id-spam-preco" class="input-group-text">{{$totalPedido}}</span>
-                    </div>
-                </div>
+                {{-- Botão imprimir --}}
+                <form id="id-form-enviar-pedido" method="POST" class="my-3" action="#">
+                    @csrf
+                    <input type="submit" class="btn btn-info w-100" value="Imprimir comanda">
+                </form>
+                {{-- Botão cancelar --}}
+                <form id="id-form-enviar-pedido" method="POST" class="my-3" action="#">
+                    @csrf
+                    <input type="submit" class="btn btn-danger w-100" value="Cancelar Pedido">
+                </form>
+                {{-- Botão Finalizar --}}
+                <form id="id-form-enviar-pedido" method="POST" class="my-3" action="#">
+                    @csrf
+                    <input type="submit" class="btn btn-success w-100" value="Finalizar Pedido">
+                </form>
             </div>
         </div>
     </div>
