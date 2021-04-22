@@ -58,3 +58,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
+
+
+Route::resource('pedidoadm', 'PedidoAdmController');

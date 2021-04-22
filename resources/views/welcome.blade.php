@@ -12,27 +12,51 @@
             <div class="text-white bg-light border p-5">
                 <div class="text-center p-5">
 
-                    @if (Route::has('admin.login'))
-                    @if (Auth::guard('admin')->check())
-                        <a href={{route('login')}} class="btn btn-lg btn-primary">Entrar como usuário</a>
-                        <a href={{route('register')}} class="btn btn-lg btn-primary">Cadastrar usuário</a>
-                        <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Área de administrador</a>                                           
-                    @else
-                        @if (Route::has('login'))
-                            @auth
-                                <a href={{url('login')}} class="btn btn-lg btn-primary">Área de usuário</a>
-                                <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Entrar como administrador</a>
-                             @else
-                                <a href={{route('login')}} class="btn btn-lg btn-primary">Entrar como usuário</a>
-                                <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Entrar como administrador</a>
 
-                                @if (Route::has('register'))
-                                    <a href={{route('register')}} class="btn btn-lg btn-primary">Cadastrar usuário</a>
+                    @if ((Route::has('login') )))
+                        @auth
+                            <a href={{url('login')}} class="btn btn-lg btn-primary">Área de usuário</a>
+                            
+
+                            @if (Route::has('admin.login'))
+                                @if(Auth::guard('admin')->check())
+                                    <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Área de administrador</a>   
+                                
+                                @else
+                                    <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Entrar como administrador</a>
                                 @endif
-                            @endauth
-                        @endif                
-                    @endif                     
-                @endif
+                            @endif
+
+                        @else
+                            <a href={{route('login')}} class="btn btn-lg btn-primary">Entrar como usuário</a>
+                            @if (Route::has('admin.login'))
+                                @if(Auth::guard('admin')->check())
+                                    <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Área de administrador</a>   
+                                
+                                @else
+                                    <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Entrar como administrador</a>
+                                @endif
+                            @endif
+
+                            @if (Route::has('register'))
+                                <a href={{route('register')}} class="btn btn-lg btn-primary">Cadastrar usuário</a>
+                            @endif
+                        @endauth
+
+                    @endif
+
+                    
+                    @if ((Route::has('admin.login')) && (!Route::has('login')))
+                        @auth
+                            @if(Auth::guard('admin')->check())
+                                <a href={{url('/admin/login')}} class="btn btn-lg btn-primary">Área de administrador</a>   
+                                <a href={{route('login')}} class="btn btn-lg btn-primary">Entrar como usuário</a>
+                            
+                            @endiF
+                        @endauth
+                    @else
+                        
+                    @endif
 
                 </div>
             </div>

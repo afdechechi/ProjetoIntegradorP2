@@ -16,7 +16,7 @@
             <div class="col-lg-4">
                 <div class="row my-3">
                     <div class="col-5">
-                        <a href="home" class="btn btn-primary w-100">Voltar</a>
+                        <a href="admin" class="btn btn-primary w-100">Voltar</a>
                     </div>
                 </div>
                 <div id="list-pedidos" class="list-group my-3">
@@ -50,7 +50,7 @@
                     <input type="text" class="form-control" value="Valor total">
                     <div class="input-group-append">
                         <span class="input-group-text">R$</span>
-                        <span id="id-spam-preco" class="input-group-text">{{$totalPedido}}</span>
+                        <span id="id-spam-preco" class="input-group-text">$100,00</span>
                     </div>
                 </div>
 
@@ -91,25 +91,10 @@
                     @csrf
                     <div class="form-group">
                         <select id="id-selecao-endereco" class="form-control">
-                            @foreach ($enderecos as $endereco)
-                                @if ($pedidos[0]->Enderecos_id == $endereco->id)
-                                    <option value={{$endereco->id}} selected>
-                                        {{$endereco->logradouro}}, nº {{$endereco->numero}}. {{$endereco->bairro}}
-                                        @if ($endereco->complemento)
-                                            . {{$endereco->complemento}}    
-                                        @endif
-                                    </option>
-                                @else
-                                    <option value={{$endereco->id}}>
-                                        {{$endereco->logradouro}}, nº {{$endereco->numero}}. {{$endereco->bairro}}
-                                        @if ($endereco->complemento)
-                                            . {{$endereco->complemento}}    
-                                        @endif
-                                    </option>
-                                @endif
-                            @endforeach
+                            <option value="Teste" selected>
                             @if (isset($pedidos[0]) && $pedidos[0]->Enderecos_id == null)
-                                <option value=null selected>Retirar no local</option>
+                            <option value=null>Retirar no local</option>
+                            
                             @else
                                 <option value=null>Retirar no local</option>
                             @endif

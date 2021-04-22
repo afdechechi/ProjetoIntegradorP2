@@ -13,10 +13,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
                         You are logged in!
                         <p></p>
-                        <a href='pedido' class="btn btn-lg btn-primary">Pedidos</a>
+                        <a href='pedidoadm' class="btn btn-lg btn-primary">Pedidos</a>
                         <p></p>
                         <a href='produto' class="btn btn-lg btn-primary">Produtos</a>
                     </div>
